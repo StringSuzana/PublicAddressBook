@@ -18,10 +18,14 @@ namespace PublicAddressBook.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Contact>().Property(x => x.FirstName).IsRequired();
-            modelBuilder.Entity<Contact>().Property(x => x.LastName).IsRequired();
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Contact>().HasMany(x => x.PhoneNumbers).WithOne(y => y.Contact).OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Contact>().Property(x => x.Name).IsRequired();
             modelBuilder.Entity<Contact>().Property(x => x.Address).IsRequired();
-            modelBuilder.Entity<Contact>().HasIndex(p => new { p.FirstName, p.LastName, p.Address }).IsUnique();
+            modelBuilder.Entity<Contact>().HasIndex(p => new { p.Name, p.Address }).IsUnique();
+
         }
     }
 }

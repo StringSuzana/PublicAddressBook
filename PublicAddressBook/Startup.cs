@@ -8,6 +8,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PublicAddressBook.Data;
+using PublicAddressBook.Repo;
+using PublicAddressBook.Repo.Abstractions;
+using PublicAddressBook.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +38,8 @@ namespace PublicAddressBook
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages();
+            services.AddScoped<IContactService, ContactService>();
+            services.AddScoped<IContactRepository, ContactRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +55,7 @@ namespace PublicAddressBook
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseStatusCodePages();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
