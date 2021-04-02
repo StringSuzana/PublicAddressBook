@@ -6,9 +6,24 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    @foreach(var contact in Model.Contacts)
-            {
-                <p>@contact.Name</p>
+    @foreach (var contact in Model.Contacts)
+    {
+<dl class="row">
+    <dt class="col-2">
+        @Html.DisplayNameFor(model => contact.Name)
+    </dt>
+    <dd class="col-2">
+        @Html.DisplayFor(model => contact.Name)
+    </dd>
+    <dt class="col-2">
+        @Html.DisplayNameFor(model => contact.Address)
+    </dt>
+    <dd class="col-2">
+        @Html.DisplayFor(model => contact.Address)
+    </dd>
+    <dd class="col-2">
+        <a asp-page="./ContactDetails" asp-route-id="@contact.Id">Details</a> 
+    </dd>
+</dl>
             }
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    </div>

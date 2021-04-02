@@ -1,0 +1,48 @@
+﻿@page
+@model PublicAddressBook.Pages.ContactDetailsModel
+
+@{
+    ViewData["Title"] = "ContactDetails";
+}
+
+<h1>ContactDetails</h1>
+
+<div>
+    <h4>Contact</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.contactViewModel.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.contactViewModel.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.contactViewModel.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.contactViewModel.Address)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.contactViewModel.DateOfBirth)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.contactViewModel.DateOfBirth)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.contactViewModel.PhoneNumbers)
+        </dt>
+        @foreach (var pn in Model.contactViewModel.PhoneNumbers)
+        {
+            if (!String.IsNullOrEmpty(pn))
+            {
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model=>pn)
+                </dd>
+            }
+        }
+    </dl>
+</div>
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
